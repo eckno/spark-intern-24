@@ -1,0 +1,24 @@
+{
+  "name": "sparkies",
+  "version": "1.0.0",
+  "description": "Greatest Backend Sparkers",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "env-cmd -f ./config/dev.env  nodemon --exec babel-node app.js"
+  },
+  "keywords": [
+    "spark",
+    "internship",
+    "backend"
+  ],
+  "author": "spark24",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "nodemon": "^3.1.0"
+  }
+}

@@ -17,6 +17,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.2",
+    "countryjs": "^1.8.0",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
     "nodemon": "^3.1.0"

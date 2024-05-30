@@ -19,6 +19,7 @@ const index = require('./routes/index');
 
 // Routes Inits
 app.use('/', index);
+app.use('/countries', index);
 
 app.use((err, req, res, next) => {
 	console.log(err)

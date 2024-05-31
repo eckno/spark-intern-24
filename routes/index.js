@@ -1,11 +1,12 @@
 
 ///this is our index route file. you can create multiple route files inside the route folder.
-
+const _ = require("underscore");
 const express = require('express');
 const router = express.Router();
 
 const countries = require("countryjs");
 
+const users = [];
 //route for our index page.
 
 // router.get("/", (req, res) => {
@@ -32,7 +33,7 @@ router.get("/country_info", (req, res) => {
 });
 
 router.get("/states", (req, res) => {
-    const country_short_name = (req.query.name !== "" && req.query.name !== 'undefined') ? req.query.name : "empty";
+    const country_short_name = (req.query.names !== "" && req.query.names !== 'undefined') ? req.query.names : "empty";
     if(country_short_name == "" || country_short_name == undefined){
         return res.json({error: "You have provided no data"});
     }
@@ -52,6 +53,57 @@ router.get("/counter", (req, res) => {
     return res.json(response);
 })
 
+router.get("/users", (req, res) => {
+    return res.json(users);
+})
+
+//////CREATING POST REQUESTS
+router.post("/register", (req, res) => {
+    let response = {};
+    const user_data = req.body;
+    if(user_data !== null && Object.keys(user_data).length > 0){
+        const email = req.body.email;
+        const username = req.body.username;
+        const password = req.body.password;
+        const confirm_password = req.body.confirm_password;
+
+        if(email === ""){
+            response['email'] = "Please provide an email address.";
+        }
+        if(username === ""){
+            response['username'] = "Please provide a username.";
+        }
+        if(password === ""){
+            response['password'] = "Please provide a secured password.";
+        }
+        if(confirm_password === ""){
+            response['confirm_password'] = "Please confirm your password.";
+        }
+
+        if(password !== confirm_password){
+            response['password'] = "Kindly make sure your password's are thesame";
+        }
+
+        users.push(user_data);
+
+        if(users.length > 0){
+            response['success'] ="You have been successfully registered. Congratulations";
+        }
+
+    } else{
+         response = {error: "you have provided an empy data. Please check your form"};
+    }
+
+    if(response !== "" || response !== null){
+        return res.json(response)
+    }
+    
+    return res.json({error: "Oops! something went wrong please check your request and try again."});
+});
+
+router.post("/login", (req, res) => {
+    //
+})
 
 //dont forget to always export
 
